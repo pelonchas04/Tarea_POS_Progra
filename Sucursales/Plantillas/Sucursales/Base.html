@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <style>
+            #salir{
+                position: relative;
+                right: 0%;
+            }
+        </style>
+    </head>
+    <body>
+        <header>Uso de sucursales</header>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <input id="salir" type="submit" value="Cerrar sesion">
+        </form>
+    </body>
+</html>

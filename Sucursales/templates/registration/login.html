@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <form action="{% url 'inicio' %}" method="post">
+            {% load widget_tweaks %}
+            <h1 class="title">Login</h1>
+            <label for="username">
+                <i class="fa-solid fa-user"></i>
+                {% render_field form.username class+="ingreso" placeholder+="Usuario" %}
+            </label>
+            <label for="password">
+                <i class="fa-solid fa-lock"></i>            
+                {% render_field form.password class+="ingreso" placeholder+="Contraseña" %}
+            </label>
+            <input type="submit" value="Iniciar">
+            {% csrf_token %}
+        </form>
+    </body>
+</html>

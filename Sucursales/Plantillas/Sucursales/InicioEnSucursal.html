@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Inicio</title>
+    </head>
+    <body>
+        {% include 'base.html' %}
+        <h1>Inicio</h1>
+        
+        {% for dato in Sucursales %}
+            <form action="{% url 'sucursal' dato.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="{{dato.nombre_sucursal}}">
+            </form>
+        {% endfor %}  
+        </ul>
+    </body>
+</html>
