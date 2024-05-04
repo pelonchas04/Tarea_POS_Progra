@@ -4,3 +4,4 @@ from Sucursales import models
 # Register your models here.
 
 admin.site.register(models.Sucursal)
+admin.site.register(models.Producto)

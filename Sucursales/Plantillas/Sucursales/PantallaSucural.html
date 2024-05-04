@@ -1,6 +1,79 @@
 <html>
+    <head>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+    </head>
     <body>
-        <h1>{{dato.nombre_sucursal}}</h1>
-        <h2>{{dato.id}}</h2>
+        {% include 'base.html' %}
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-md-1">
+                    <b>{{Sucursal.nombre_sucursal}}</b>
+                </div>
+                <div class="col-md-1">
+                    <form action="{% url 'inicio'  %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning">Volver</button>
+                    </form>
+                </div>
+            </div>
+            {% if productos %}
+                <div class="row">
+                    <div class="col-md-1"><h4>Producto</h4></div>
+                    <div class="col-md-1"><h4>Precio costo</h4></div>
+                    <div class="col-md-1"><h4>Precio</h4></div>
+                    <div class="col-md-1"><h4>Existencias</h4></div>
+                </div>
+                {% for producto in productos %}
+                    <div class="row">
+                        <div class="col-md-1">
+                            {{producto.nombre_producto}}
+                        </div>
+                        <div class="col-md-1">
+                            {{producto.precio_costo}}
+                        </div>
+                        <div class="col-md-1">
+                            {{producto.precio_venta}}
+                        </div>
+                        <div class="col-md-1">
+                            {{producto.existencias}}
+                        </div>
+                        <div class="col-md-1">
+                            <form action="{% url 'modificar' Sucursal.id producto.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Modificar</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                    <div class="row">
+                        <div class="col-md-12"><h1>No hay ningun producto ingresado</h1></div>
+                    </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <form action="{% url 'agregar' Sucursal.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-success" type="submit">Ingresar producto</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
+        
+        <div>
+            <form action="{% url 'vender' Sucursal.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-info" type="submit">Vender productos</button>
+            </form>
+            <form action="{% url 'comprar' Sucursal.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-info" type="submit">Comprar productos</button>
+            </form>
+        </div>
     </body>
 </html>
