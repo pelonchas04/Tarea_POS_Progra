@@ -11,4 +11,8 @@ urlpatterns = [
     path('pos/<int:dato_id>', views.Vender, name='vender'),
     path('comprar/<int:dato_id>', views.Comprar, name='comprar'),
     path('modificar/<int:dato_id>/<int:producto_id>', views.Modificar_Producto, name='modificar'),
+
+    # path para usar redirect
+    path('eliminar/<int:sucursal_id>/<int:p_id>', views.Eliminar_Producto, name="eliminar"),
+    path('aproducto/<int:n_sucursal>', views.Agregar_Venta, name="aproducto")
 ]

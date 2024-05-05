@@ -1,0 +1,36 @@
+<html>
+    <head>
+        {% include 'Base.html' %}
+    </head>
+    <body>
+
+        <div class="conteiner">
+            <div class="row">
+                <div class="col-md-1">
+                    <form action="{% url 'sucursal' numeroS %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-warning" type="submit">
+                            Volver
+                        </button>
+                    </form>
+                </div>
+                <div class="col-md-1 offset-md-4">Venta #{{venta.numero_de_venta}}</div>
+            </div>
+
+            <form action="{% url 'aproducto' numeroS %}" method="get">
+                <div class="row offset-md-1">
+                    <div class="col-md-1"><input type="hidden" name="id_venta" value="{{venta.numero_de_venta}}"></div>
+                    <div class="col-md-4">
+                        <h4>{{mensaje}}</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="codigo">
+                    </div>
+                    <div class="col-md-1"><input type="submit" value="Buscar" class="btn btn-primary"></div>
+                </div>
+            </form>
+
+
+        </div>
+    </body>
+</html>

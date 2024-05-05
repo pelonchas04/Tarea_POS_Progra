@@ -10,3 +10,12 @@ class Producto(models.Model):
     precio_venta = models.FloatField()
     existencias = models.IntegerField()
     codigo_de_barras = models.CharField(max_length=20)
+
+class Venta(models.Model):
+    numero_de_venta = models.IntegerField()
+    id_sucursal = models.IntegerField()
+    estado = models.BooleanField()
+
+class ListaVentas(models.Model):
+    id_venta = models.IntegerField()
+    id_producto = models.IntegerField()

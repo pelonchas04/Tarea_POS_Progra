@@ -47,6 +47,9 @@
                                 <button type="submit" class="btn btn-primary">Modificar</button>
                             </form>
                         </div>
+                        <div class="col-md-1">
+                            <a href="/eliminar/{{Sucursal.id}}/{{producto.id}}" class="btn btn-danger">Eliminar</a>
+                        </div>
                     </div>
                 {% endfor %}
             {% else %}
@@ -68,11 +71,11 @@
         <div>
             <form action="{% url 'vender' Sucursal.id %}" method="post">
                 {% csrf_token %}
-                <button class="btn btn-info" type="submit">Vender productos</button>
+                <button class="btn btn-info text-white" type="submit">Vender productos</button>
             </form>
             <form action="{% url 'comprar' Sucursal.id %}" method="post">
                 {% csrf_token %}
-                <button class="btn btn-info" type="submit">Comprar productos</button>
+                <button class="btn btn-info text-white" type="submit">Comprar productos</button>
             </form>
         </div>
     </body>

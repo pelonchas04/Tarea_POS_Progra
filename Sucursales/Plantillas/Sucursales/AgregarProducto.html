@@ -12,13 +12,18 @@
                     {% csrf_token %}
                     <button type="submit" class="btn btn-warning">Volver</button>
                 </form>
-                <div class="col-md-2 ">{{mensaje}}</div>
+                <div class="col-md-3">
+                    {% if mensaje == "Llene todos los campos" %}
+                        <div class="text-danger"><h3>{{mensaje}}</h3></div>
+                    {% else %}
+                        <div class="text-success"><h3>{{mensaje}}</h3></div>
+                    {% endif %}
+                </div>
             </div>
-            <form action="{% url 'agregar' numeroS %}" method="POST">
+            <form action="{% url 'agregar' numeroS %}" method="GET">
                     {% csrf_token %}
                 <div class="row fila_producto">
-                    <div class="col-md-2"><h6 class="text-success">Sucursal del producto: </h6></div>
-                    <div class="col-md-1"><input name="id_sucursal" type="text" value="{{numeroS}}"></div>
+                    <div class="col-md-1"><input name="id_sucursal" type="hidden" value="{{numeroS}}"></div>
                     <div class="col-md-1"></div>
                     <div class="col-md-2"><h6 class="text-success">Ingrese el nombre del producto: </h6></div>
                     <div class="col-md-1"><input name="nombre_producto" type="text"></div>

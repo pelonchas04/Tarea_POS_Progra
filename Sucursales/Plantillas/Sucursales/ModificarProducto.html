@@ -1,13 +1,51 @@
 <html>
-    <head>
-
+    <head>{% include 'Base.html' %}
     </head>
     <body>
-        {% include 'Base.html' %}
         <div class="conteiner">
             <div class="row">
-                <div class="col-md-1"></div>
+                <div class="col-md-1">
+                <form action="{% url 'sucursal' numeroS %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-warning" type="submit">
+                        Volver
+                    </button>
+                </form>
+                </div>
+                {% if mensaje == "Llene todos los campos" %}
+                    <div class="col-md-4"><h3 class="text-danger">{{mensaje}}</h3></div>
+                {% else %}
+                    <div class="col-md-4"><h3 class="text-success">{{mensaje}}</h3></div>
+                {% endif %}
             </div>
+            <form action="{% url 'modificar' numeroS Producto.id %}" method="get">
+                {% csrf_token %}
+                <div class="row fila_producto">
+                    <div class="col-md-1"><input name="id_sucursal" type="hidden" value="{{Producto.id_sucursal}}"></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2"><h6 class="text-success">Ingrese el nombre del producto: </h6></div>
+                    <div class="col-md-1"><input name="nombre_producto" type="text" value="{{Producto.nombre_producto}}" ></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2"><h6 class="text-success">Ingrese su precio costo: </h6></div>
+                    <div class="col-md-1"><input name="precio_costo" type="number" step="any" value="{{Producto.precio_costo}}"></div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row fila_producto">
+                    <div class="col-md-2"><h6 class="text-success">Ingrese el precio de venta: </h6></div>
+                    <div class="col-md-1"><input name="precio_venta" type="number" step="any" value="{{Producto.precio_venta}}"></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2"><h6 class="text-success">Ingrese la existencia: </h6></div>
+                    <div class="col-md-1"><input name="existencias" type="number" value="{{Producto.existencias}}"></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2"><h6 class="text-success">Ingrese el codigo de barras: </h6></div>
+                    <div class="col-md-1"><input name="codigo_de_barras" type="text" value="{{Producto.codigo_de_barras}}"></div>
+                </div>
+                <div class="row fila_producto">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <button class="btn btn-success" type="submit">Modificar producto</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </body>
 </html>
