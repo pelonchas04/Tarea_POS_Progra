@@ -16,7 +16,7 @@ class SucursalAdmin(admin.ModelAdmin):
     search_fields = ("nombre_sucursal",)
 
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ("id","nombre_producto", "codigo_de_barras", "id_sucursal")
+    list_display = ("nombre_producto", "codigo_de_barras", "id_sucursal")
     search_fields = ("codigo_de_barras",)
 
 admin.site.register(models.Sucursal, SucursalAdmin)

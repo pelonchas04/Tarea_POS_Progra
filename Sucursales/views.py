@@ -120,6 +120,7 @@ def Vender(request, dato_id):
 
     else:
         ultima = lista_ventas.last()
+        venta.id = ultima.id + 1
         venta.numero_de_venta = ultima.numero_de_venta + 1
         venta.id_sucursal = sucursal.id
         venta.estado = False
@@ -149,6 +150,7 @@ def Agregar_Venta(request, n_sucursal):
 
             lista_ventas.id_venta = request.GET["id_venta"]
             lista_ventas.id_producto = buscar_producto.id
+            lista_ventas.cantidad = 1
 
             lista_ventas.save()
         except Producto.DoesNotExist:

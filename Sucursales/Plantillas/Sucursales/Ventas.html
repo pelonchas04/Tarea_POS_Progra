@@ -30,6 +30,7 @@
                 </div>
             </form>
             
+            
             {% if mensaje == "" %}
                 <div class="row offset-md-4" >
                     <div class="col-md-1 text-danger presentacion_venta"><h4>Codigo</h4></div>
@@ -50,7 +51,7 @@
                         <div class="col-md-1 producto_venta"><h6>{{producto.nombre_producto}}</h6></div>
                         <div class="col-md-1 producto_venta"><h6 class="precio">{{producto.precio_venta}}</h6></div>
                         <div class="col-md-1 producto_venta"><input id="miInput" class="cantidad" type="number" style="width: 50px;" onchange="detectarCambio()" value="1"></div>
-                        <div class="col-md-1 producto_venta"><p class="total">{%  * }</p></div>
+                        <div class="col-md-1 producto_venta"><p class="total"></p></div>
                         <div class="col-md-1 producto_venta"><input type="submit" class="btn btn-danger" value="Eliminar" ></div>
                     </div>
                 </form>
