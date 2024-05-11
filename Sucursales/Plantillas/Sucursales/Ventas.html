@@ -19,7 +19,7 @@
 
             <form action="{% url 'aproducto' numeroS %}" method="get">
                 <div class="row offset-md-1">
-                    <div class="col-md-1"><input type="hidden" name="id_venta" value="{{venta.numero_de_venta}}"></div>
+                    <div class="col-md-1"><input type="hidden" name="id_venta" value="{{venta.id}}"></div>
                     <div class="col-md-4">
                         <h4>{{mensaje}}</h4>
                     </div>
@@ -29,8 +29,80 @@
                     <div class="col-md-1"><input type="submit" value="Buscar" class="btn btn-primary"></div>
                 </div>
             </form>
+            
+            {% if mensaje == "" %}
+                <div class="row offset-md-4" >
+                    <div class="col-md-1 text-danger presentacion_venta"><h4>Codigo</h4></div>
+                    <div class="col-md-1 text-danger presentacion_venta"><h4>Nombre</h4></div>
+                    <div class="col-md-1 text-danger presentacion_venta"><h4>Precio</h4></div>
+                    <div class="col-md-1 text-danger presentacion_venta"><h4>Cantidad</h4></div>
+                    <div class="col-md-1 text-danger presentacion_venta"><h4>Total</h4></div>
 
+                </div>
+            {% endif %}
+
+            {% for producto in productos %}
+                {% if producto.codigo_de_barras != none %}
+                <form action="{% url 'eventa' numeroS %}" method="get">
+                    <div class="row offset-md-4">
+                        <input type="hidden" name="producto_id" value="{{producto.id}}">
+                        <div class="col-md-1 producto_venta"><h6>{{producto.codigo_de_barras}}</h6></div>
+                        <div class="col-md-1 producto_venta"><h6>{{producto.nombre_producto}}</h6></div>
+                        <div class="col-md-1 producto_venta"><h6 class="precio">{{producto.precio_venta}}</h6></div>
+                        <div class="col-md-1 producto_venta"><input id="miInput" class="cantidad" type="number" style="width: 50px;" onchange="detectarCambio()" value="1"></div>
+                        <div class="col-md-1 producto_venta"><p class="total">{%  * }</p></div>
+                        <div class="col-md-1 producto_venta"><input type="submit" class="btn btn-danger" value="Eliminar" ></div>
+                    </div>
+                </form>
+                {% endif %}
+            {% endfor %}
+
+            <div class="row offset-md-5">
+                <div class="col-md-2">
+                    <form action="{% url 'confirmar_venta' %}" method="get">
+                        <input id="sucursal_id" type="hidden" name="sucursal" value="{{numeroS}}">
+                        <input type="submit" value="Vender">
+                    </form>
+                </div>
+            </div>
 
         </div>
+        <script>
+            function calcular(input){
+                    var row = input.parentElement.parentElement;
+                    var precio = parseFloat(row.querySelector(".precio").innerText);
+                    var cantidad = parseFloat(input.value);
+                    var total = precio * cantidad;
+                    row.querySelector(".total").innerText = total;
+                }
+
+                window.onload = function(){
+                    var inputs = document.querySelectorAll(".cantidad");
+                    inputs.forEach(function(input){
+                        calcular(input);
+                    });
+                }
+                
+                function detectarCambio() {
+                    var valor = document.getElementById("miInput").value;
+                    var id_sucursal = ducment.getElementById("sucursal_id").value;
+                    console.log("Nuevo valor:", valor);
+
+                    // Si quieres enviar el nuevo valor de vuelta al servidor, puedes hacerlo usando AJAX
+                    // Por ejemplo, usando jQuery
+                    $.ajax({
+                        url: 'aumentar_producto',
+                        type: 'GET',
+                        data: {
+                            'nuevo_valor': valor,
+                            'id_sucursal': id_sucursal
+                        },
+                        success: function(response) {
+                            console.log("¡Datos enviados al servidor con éxito!");
+                        }
+                    });
+                }
+        </script>
+
     </body>
 </html>

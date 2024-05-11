@@ -19,3 +19,4 @@ class Venta(models.Model):
 class ListaVentas(models.Model):
     id_venta = models.IntegerField()
     id_producto = models.IntegerField()
+    cantidad = models.IntegerField()
